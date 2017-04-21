@@ -1,0 +1,48 @@
+body {
+	background: #232066;
+}
+.header img {
+	float: left;
+}
+.header {
+	margin-top: 20px;
+	background: #fff;
+	text-align: right;
+	border-bottom: 1px solid #ddd;
+}
+.header * {
+	padding-right: 20px;
+}
+.header h1 {
+	padding-top: 30px;
+}
+.header img {
+	padding: 20px;
+}
+.whitepage {
+	-moz-box-shadow:    0px 1px 3px 1px #b9c1d0;
+	-webkit-box-shadow: 0px 1px 3px 1px #b9c1d0;
+	box-shadow:         0px 1px 3px 1px #b9c1d0;
+	
+	-webkit-box-shadow: 0px 2px 6px 0px rgba(25,67,153,0.25);
+	-moz-box-shadow: 0px 2px 6px 0px rgba(25,67,153,0.25);
+	box-shadow: 0px 2px 6px 0px rgba(25,67,153,0.25);
+}
+.main {
+	background: #fff;
+	padding-top: 20px;
+}
+textarea {
+	font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace; 
+	width: 100%;
+	height: 200px;
+}
+#pubkey-entry {
+	font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+  	word-break: normal;
+	/* font-size: 10px;
+	line-height: 10px; */
+}
+.well input {
+	width: 90%;
+}
