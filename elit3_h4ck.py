@@ -7,27 +7,33 @@ import argparse
 # add email to list to send to
 # send advising bar 
 
-# sys.stdout = open('output.txt', 'w')
-# call(["ls", "-l"])
-# elite_hack -f filename.txt
-# elite_hack -n
+####### HOW TO RUN THIS FILE ###########
+# elit3_h4ck -file filename.txt
+# elit3_h4ck -n
 
 ####################################
 # Parse args to determine where to get email addresses
 ####################################
-parser = argparse.ArgumentParser(description="Determine where to find email addresses for phishing attack.")
-parser.add_argument('filename', help='use a file')
-# parser.add_argument('-n', dest='accumulate', action='store_const', default=max,
-#                    help='find email addresses from current local internet')
+parser = argparse.ArgumentParser(description="Send email addresses a UT registration phishing attack.")
+parser.add_argument('-file', help='use a file')
+parser.add_argument('-n', action='store_true', help='find email addresses from finger, canvas, and UT directory')
 args = parser.parse_args()
 email_list = []
 
-## if a file is being used.....
-file = open(args.filename, "r", encoding="utf-8")
-try:
-    email_list = file.read().splitlines()
-finally:
-    file.close()
+if args.file:
+    print("Sending phishing emails to addresses in file ~" + args.file + "~")
+    # if a file is being used.....
+    file = open(args.file, "r", encoding="utf-8")
+    try:
+        email_list = file.read().splitlines()
+    finally:
+        file.close()
+
+if args.n:
+    print("Sending phishing emails to addresses found from UTCS finger, Canvas groups, and UT directory")
+
+print(email_list)
+
 
 
 ####################################
