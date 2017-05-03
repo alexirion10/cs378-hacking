@@ -2,15 +2,36 @@ import sys
 import argparse                    #parsing command line args
 from bs4 import BeautifulSoup      #webscraping
 from subprocess import call
+import requests
+import json
+import httplib
+
+####### HOW TO RUN THIS FILE ###########
+# elit3_h4ck -file filename.txt         #uses email addresses already in text file
+# elit3_h4ck -n                         #pulls email addresses from canvas
 
 # get student names from canvas / finger cs machines
 # look up student email addresses on student api directory
 # add email to list to send to
 # send advising bar 
 
-####### HOW TO RUN THIS FILE ###########
-# elit3_h4ck -file filename.txt         #uses email addresses already in text file
-# elit3_h4ck -n                         #pulls email addresses from canvas
+COURSE_ID = 1195393
+ACCESS_TOKEN = 'ask alex.  This is private'
+
+def call(path, request_type='GET', data=None):
+    connection = httplib.HTTPSConnection("utexas.instructure.com")
+    headers = {"Content-type": "application/json", "Authorization": "Bearer " + ACCESS_TOKEN}
+
+    json_data = json.dumps(data) if data is not None else ""
+    connection.request(request_type, "/api/v1/" + path, json_data, headers)
+    response = connection.getresponse()
+    s = response.read().decode()
+    return json.loads(s)
+
+def get_student_names(cur_course_id):
+    #returns a list of up to 100 student names and emails given a course ID
+    return call("courses/{}/users?per_page=100&include[]=email".format(cur_course_id))
+
 
 def find_canvas_student_names():
     student_names = []
@@ -20,6 +41,10 @@ def find_canvas_student_names():
     return student_names
 
 def ut_directory_lookup(student_names):
+    my_user_names = get_student_names(COURSE_ID)
+    for name in my_user_names:
+        print(name['name'] + '        ' + name['email'])
+
     # GET request to UT directory, webscrape for email address
     for name in student_names:
         name_array = name.split()
