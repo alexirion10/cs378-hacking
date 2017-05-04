@@ -122,9 +122,9 @@ for email in email_list:
 msg = MIMEMultipart()
 msg['From'] = FROM_ADDR
 msg['Subject'] = 'Get Phished!'
-phish_mail = open('phishing-email.txt', 'rb')
-msg.attach(MIMEText(phish_mail.read()))
-phish_mail.close()
+phish_mail_file = open('phishing-email.txt', 'rb')
+msg.attach(MIMEText(phish_mail_file.read()))
+phish_mail_file.close()
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.ehlo()
