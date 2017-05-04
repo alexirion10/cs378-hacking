@@ -1,17 +1,28 @@
-Warning!  This is an phishing email from the final project in cs378 Ethical Hacking!
-
+<html>
+<body style="font-family: monospace;">
+<p>
 ************* DO NOT REPLY TO THIS EMAIL ****************
-
+</p>
+<p>
 Computer Science Advising Center sent you a SAN entitled:
 C S Entry-Level, Repetition of a Course and Non-Academic Policies
 Use the link below to read your message.
-http://10.202.208.83
+<a href="http://10.202.208.83">https://san.utexas.edu/[TODO, make this convincing]</a>
+</p>
 
-===========> Don't depend on email! <===========
+<p>
+===========&gt; Don't depend on email! &lt;===========
+</p>
+<p>
 Check your Secure Academic Notes inbox ANY TIME at:
-https://utdirect.utexas.edu/san/
+<a href="https://utdirect.utexas.edu/san/">https://utdirect.utexas.edu/san/</a>
+</p>
 
+<p>
 THE  UNIVERSITY OF TEXAS AT AUSTIN - Secure Academic Notes
 SAN provides a secure environment for student-staff communication
 and helps to ensure that student information is protected as
 required by FERPA, the Family Educational Rights and Privacy Act
+</p>
+</body>
+</html>
