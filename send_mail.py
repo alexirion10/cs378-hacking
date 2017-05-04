@@ -1,34 +1,26 @@
-## email tester
-#
-# import smtplib for the actual sending function
-# import smtplib
+#### A file simply for testing ####
 
-# Import the email modules we'll need
-# from email.mime.text import MIMEText
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
 
+email_list = ['alexirion10@gmail.com', 'alexirion10@utexas.edu', 'alex.irion@ciraconnect.com', 'kdrewniak@utexas.edu', 'DARKTONY13@GMAIL.COM']
 
+msg = MIMEMultipart()
+msg['Subject'] = 'Get Phished!'
+msg['From'] = 'someoneelse@gmail.com'
 
-# Open a plain text file for reading.  For this example, assume that
-# the text file contains only ASCII characters.
-# fp = open(textfile, 'rb')
-# Create a text/plain message
-# msg = MIMEText('some email body stuff here')
-# # fp.close()
+body = 'A very bad link here!\n\nThe emails are ready to go...\ncreate a message for me to send Tony/Kry'
+msg.attach(MIMEText(body, 'plain'))
 
-# # me == the sender's email address
-# # you == the recipient's email address
-# msg['Subject'] = 'some contents...'
-# msg['From'] = 'alexirion10@utexas.edu'
-# msg['To'] = 'alexirion10@gmail.com'
+fromaddr = 'alexirion10@gmail.com'
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.ehlo()
+server.starttls()
+server.login('alexirion10@gmail.com', 'Chargers101')
 
-# # Send the message via our own SMTP server, but don't include the
-# # envelope header.
-# s = smtplib.SMTP('localhost')
-# s.sendmail(me, [you], msg.as_string()
-# s.quit()
+for target in email_list:
+    msg['To'] = target
+    server.sendmail('someoneelse@gmail.com', target, msg.as_string())
 
-
-
-
-
-
+server.quit()

@@ -5,20 +5,31 @@ from subprocess import call
 import requests
 import json
 import httplib
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
 
 ####### HOW TO RUN THIS FILE ###########
-# elit3_h4ck -file filename.txt         #uses email addresses already in text file
-# elit3_h4ck -n                         #pulls email addresses from canvas
+# elit3_h4ck -efile filename.txt        #uses email addresses in text file
+# elit3_h4ck -nfile filename.txt        #uses UT student names in text file
+# elit3_h4ck -cid integer               #pulls email addresses from canvas based on course id
 
-# get student names from canvas / finger cs machines
-# look up student email addresses on student api directory
-# add email to list to send to
-# send advising bar 
+# get student names from canvas OR pre written file
+# look up student email addresses from canvas api OR UT directory
+# add emails to list for phishing attack
+# send advising phishing email
+# start up server listening for clicked requests
+# 
+# Canvas courses api
+# https://canvas.instructure.com/doc/api/courses.html
+# Canvas Oauth2
+# https://canvas.instructure.com/doc/api/file.oauth.html
 
-COURSE_ID = 1195393
-ACCESS_TOKEN = 'ask alex.  This is private'
+COURSE_ID = 1195393  #default value for cs378 ethical hacking
+ACCESS_TOKEN = '1017~DSH05LRqWUsyMocT6hCsMHNuX2gA6Yl6NJlt0Zwnsde0uj9xC8bT66YhlmSgva6g'
+email_list = []
 
-def call(path, request_type='GET', data=None):
+def call_canvas(path, request_type='GET', data=None):
     connection = httplib.HTTPSConnection("utexas.instructure.com")
     headers = {"Content-type": "application/json", "Authorization": "Bearer " + ACCESS_TOKEN}
 
@@ -28,24 +39,22 @@ def call(path, request_type='GET', data=None):
     s = response.read().decode()
     return json.loads(s)
 
-def get_student_names(cur_course_id):
+def get_canvas_emailaddr(cur_course_id):
     #returns a list of up to 100 student names and emails given a course ID
-    return call("courses/{}/users?per_page=100&include[]=email".format(cur_course_id))
-
-
-def find_canvas_student_names():
-    student_names = []
-    student_names.append('hello world')
-    student_names.append('alex irion')
-    student_names.append('tony sampson')
-    return student_names
+    student_info = call_canvas("courses/{}/users?per_page=100&include[]=email".format(cur_course_id))
+    build_email_list = []
+    for student in student_info:
+        try:
+            build_email_list.append(student['email'])
+            # print(name['name'] + '        ' + name['email'])
+        except:
+            print('!!!!!  Invalid course ID  !!!!!!\n!!!!!  Course doesn\'t exist or you are not enrolled  !!!!!!')
+            return list()
+    return build_email_list
 
 def ut_directory_lookup(student_names):
-    my_user_names = get_student_names(COURSE_ID)
-    for name in my_user_names:
-        print(name['name'] + '        ' + name['email'])
-
     # GET request to UT directory, webscrape for email address
+    build_email_list = []
     for name in student_names:
         name_array = name.split()
         request_url = 'https://directory.utexas.edu/index.php?q=' # Set destination URL here
@@ -53,54 +62,84 @@ def ut_directory_lookup(student_names):
         request_url += '&scope=all&submit=Search'
         print(request_url)
 
-        # page = requests.get(request_url)
-        # soup = BeautifulSoup(page.content, "html.parser")
+        page = requests.get(request_url)
+        soup = BeautifulSoup(page.content, "html.parser")
 
-        # table = soup.find_all('table', class_='dir_info')
-        # for row in table:
-        #     cells = row.find_all('tr')
-        #     for tr in cells:
-        #         tds = tr.find_all('td')
-        #         if 'Email:' in str(tds[0].text):
-        #             email_list.append( str(tds[1].text)[1:-1] )
-
+        table = soup.find_all('table', class_='dir_info')
+        for row in table:
+            cells = row.find_all('tr')
+            for tr in cells:
+                tds = tr.find_all('td')
+                if 'Email:' in str(tds[0].text):
+                    build_email_list.append( str(tds[1].text)[1:-1] )
+    return build_email_list
 
 ####################################
-# Parse args to determine where to get email addresses
+# Parse c-line args to determine where to get email addresses
 ####################################
 parser = argparse.ArgumentParser(description="Send email addresses a UT registration phishing attack.")
-parser.add_argument('-file', help='use a file')
-parser.add_argument('-n', action='store_true', help='find email addresses from finger, canvas, and UT directory')
+parser.add_argument('-efile', help='file of email addresses')
+parser.add_argument('-nfile', help='file of UT student names')
+parser.add_argument('-cid', help='find email addresses from canvas course id')
 args = parser.parse_args()
-email_list = []
 
-if args.file:
+if args.efile:
     #gets email addresses from a text file
-    print("Sending phishing emails to addresses in file ~" + args.file + "~")
-    file = open(args.file, "r", encoding="utf-8")
+    print("Sending phishing emails to addresses in file ~" + args.efile + "~")
+    file = open(args.efile, "r")
     try:
         email_list = file.read().splitlines()
     finally:
         file.close()
 
-if args.n:
-    print("Sending phishing emails to addresses found from UTCS finger, Canvas groups, and UT directory")
-    # run finger on UTCS machines
+if args.nfile:
+    print("Sending phishing emails to names in file ~" + args.nfile + "~")
+    COURSE_ID = args.nfile
+    file = open(args.nfile, "r")
+    try:
+        student_names = file.read().splitlines()
+    finally:
+        file.close()
+    # find student names from ut directory
+    email_list = ut_directory_lookup(student_names)
+
+if args.cid:
+    print("Sending phishing emails to addresses found in UT course ID: " + args.cid)
+    COURSE_ID = args.cid
     # find student names from canvas api
-    student_names = find_canvas_student_names()
-    #find student email address from student name
-    ut_directory_lookup(student_names)
+    email_list = get_canvas_emailaddr(COURSE_ID)
 
-
+# I have now compiled all of the email addresses I wish to send a phishing attack to
 ####################################
 # send email to list of addresses
 ####################################
+FROM_ADDR = 'alexirion10@gmail.com'
+PASSWD = ''
 
+for email in email_list:
+    print(email)
+
+msg = MIMEMultipart()
+msg['From'] = FROM_ADDR
+msg['Subject'] = 'Get Phished!'
+body = 'A very bad link here!\n\nThe emails are ready to go...\ncreate a message for me to send Tony/Kry'
+msg.attach(MIMEText(body, 'plain'))
+
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.ehlo()
+server.starttls()
+server.login(FROM_ADDR, PASSWD)
+
+for target in email_list:
+    msg['To'] = target
+    server.sendmail(FROM_ADDR, target, msg.as_string())
+
+server.quit()
 
 
 #####################################
-# listener for clicked submit buttons on our fake web server???
-####################################
+# listener for clicked submit buttons on our fake web server
+# ####################################
 # call(['python3', 'evil_server.py'])
 
 
