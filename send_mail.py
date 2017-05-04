@@ -8,21 +8,17 @@ email_list = ['alexirion10@gmail.com', 'kdrewniak@utexas.edu', 'DARKTONY13@GMAIL
 
 msg = MIMEMultipart()
 msg['Subject'] = 'Get Phished Round 2!!'
-msg['From'] = 'someoneelse@gmail.com'
+msg['From'] = 'san@utexas.edu'
 
 phish_mail = open('phishing_email.txt', 'rb')
 msg.attach(MIMEText(phish_mail.read()))
 phish_mail.close()
 
-
-fromaddr = 'alexirion10@gmail.com'
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.ehlo()
+server = smtplib.SMTP('smtp.hushmail.com', 587)
 server.starttls()
-server.login('alexirion10@gmail.com', 'password here')
-
+server.login('eth_hack@hushmail.com', 'hacker1234')
 for target in email_list:
     msg['To'] = target
-    server.sendmail('someoneelse@gmail.com', target, msg.as_string())
+    server.sendmail('eth_hack@hushmail.com', target, msg.as_string())
 
 server.quit()
