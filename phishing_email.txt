@@ -5,7 +5,7 @@ Warning!  This is an phishing email from the final project in cs378 Ethical Hack
 Computer Science Advising Center sent you a SAN entitled:
 C S Entry-Level, Repetition of a Course and Non-Academic Policies
 Use the link below to read your message.
-https://utdirect.utexas.edu/san/svue.WBX?s_i=2017020610380936708
+http://10.202.208.83
 
 ===========> Don't depend on email! <===========
 Check your Secure Academic Notes inbox ANY TIME at:
