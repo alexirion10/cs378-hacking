@@ -123,7 +123,7 @@ if args.cid:
 ####################################
 # send email to list of addresses
 ####################################
-FROM_ADDR = 'cs378_final_project@hushmail.com'
+FROM_ADDR = 'secureacademicnotice@gmail.com'
 PASSWD = 'hacker1234'
 OUR_IP = get_ip_address()
 
@@ -139,8 +139,8 @@ with open('phishing_email.txt', 'rb') as phish_mail_file:
         msg.attach(MIMEText(phish_html, 'html'))
 
 
-server = smtplib.SMTP_SSL('smtp.hushmail.com', 465)
-server.set_debuglevel(5)
+server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+# server.set_debuglevel(5)
 server.login(FROM_ADDR, PASSWD)
 
 for target in email_list:
