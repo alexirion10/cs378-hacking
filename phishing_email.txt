@@ -1,5 +1,5 @@
 <html>
-<body style="font-family: monospace;">
+<body>
 <p>
 ************* DO NOT REPLY TO THIS EMAIL ****************
 </p>
