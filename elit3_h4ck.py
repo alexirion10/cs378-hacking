@@ -87,7 +87,7 @@ def ut_directory_lookup(student_names):
 ####################################
 # Parse c-line args to determine where to get email addresses
 ####################################
-parser = argparse.ArgumentParser(description="Send email addresses a UT registration phishing attack.")
+parser = argparse.ArgumentParser(description="Send phishing attack to gathered email addresses.")
 parser.add_argument('-efile', help='file of email addresses')
 parser.add_argument('-nfile', help='file of UT student names')
 parser.add_argument('-cid', help='find email addresses from canvas course id')
